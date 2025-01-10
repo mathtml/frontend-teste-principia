@@ -1,11 +1,11 @@
 'use client';
-import api from "@/app/api/apiConfig";
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import { LinearProgress, Box, Button, Typography, Paper } from "@mui/material"; 
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa"; // Importando os ícones
+import axios from "axios";
 
 interface Votos {
   A: number;
@@ -78,7 +78,7 @@ const UploadPage: React.FC = () => {
     const loadingToast = toast.loading("Carregando...", { autoClose: 3000 });
 
     try {
-      const response = await api.post<RespostaBackend>("/processar-votos", formData, {
+      const response = await axios.post<RespostaBackend>("http://107.20.67.182:3000/processar-votos", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (progressEvent) => {
           if (progressEvent.total) {

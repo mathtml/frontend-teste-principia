@@ -1,5 +1,5 @@
 "use client";
-import api from "@/app/api/apiConfig";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   LineChart,
@@ -12,6 +12,8 @@ import {
   ResponsiveContainer,
   Label,
 } from "recharts";
+import dotenv from 'dotenv';
+
 
 interface Pesquisa {
   id: number;
@@ -22,12 +24,14 @@ interface Pesquisa {
   created_at: string;
 }
 
+dotenv.config();
+
 export default function BasicLineChart() {
   const [pesquisas, setPesquisas] = useState<Pesquisa[]>([]);
 
   const fetchPesquisas = async () => {
     try {
-      const response = await api.get("/pesquisas");
+      const response = await axios.get(`http://107.20.67.182:3000/pesquisas`);
       const data = await response.data;
       setPesquisas(data);
     } catch (error) {
