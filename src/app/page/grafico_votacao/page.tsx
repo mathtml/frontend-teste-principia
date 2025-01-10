@@ -45,6 +45,7 @@ export default function BasicLineChart() {
 
   const formatarData = (data: string) => {
     const date = new Date(data);
+    date.setDate(date.getDate() + 1);
     return new Intl.DateTimeFormat("pt-BR").format(date);
   };
 

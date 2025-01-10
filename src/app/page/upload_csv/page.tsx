@@ -74,7 +74,6 @@ const UploadPage: React.FC = () => {
     const formData = new FormData();
     formData.append("arquivo", file);
 
-    // Mostrar toast de carregando
     const loadingToast = toast.loading("Carregando...", { autoClose: 3000 });
 
     try {
@@ -91,21 +90,20 @@ const UploadPage: React.FC = () => {
       if (response.data) {
         setExcelData(response.data);
 
-        // Atualiza o toast de "carregando" para "sucesso"
         toast.update(loadingToast, {
           render: "Arquivo enviado com sucesso!",
           type: "success",
-          autoClose: 3000, // Auto fechar após 3 segundos
-          icon: <FaCheckCircle color="green" />, // Usando ícone de sucesso
-          closeButton: true, // Botão de fechar
+          autoClose: 3000,
+          icon: <FaCheckCircle color="green" />, 
+          closeButton: true, 
         });
       } else {
         toast.update(loadingToast, {
           render: "Erro: Resposta inesperada do servidor.",
           type: "error",
           autoClose: 3000,
-          icon: <FaTimesCircle color="red" />, // Usando ícone de erro
-          closeButton: true, // Botão de fechar
+          icon: <FaTimesCircle color="red" />, 
+          closeButton: true, 
         });
       }
     } catch (error) {
@@ -114,8 +112,8 @@ const UploadPage: React.FC = () => {
         render: "Erro ao fazer upload do arquivo.",
         type: "error",
         autoClose: 3000,
-        icon: <FaTimesCircle color="red" />, // Usando ícone de erro
-        closeButton: true, // Botão de fechar
+        icon: <FaTimesCircle color="red" />, 
+        closeButton: true, 
       });
     } finally {
       setUploadProgress(0);
